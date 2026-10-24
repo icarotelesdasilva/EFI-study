@@ -8,7 +8,7 @@ jmp 0x0000:.setup_segments
 
 
 .setup_segments:
-  
+mov [boot_drive], dl   
  
 cli
 
@@ -32,5 +32,5 @@ jmp disk
 
 boot_drive db 0
 
-times 510 - ($ - $$) db 0 
-dw 0xAA55  
+times 510-($-$$) db 0
+dw 0xAA55
