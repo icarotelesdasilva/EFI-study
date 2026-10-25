@@ -2,13 +2,10 @@
 
 all:
 	nasm -f bin boot.asm -o boot.bin
-	nasm -f bin entry.asm -o entry.bin 
+	nasm -f elf32 entry.asm -o entry.o	
+	ld -m elf_i386 -Ttext 0x8000 entry.o -o entry.bin --oformat binary
 	cat boot.bin entry.bin > boot.img
-	dd if=/dev/zero of=boot.img bs=512 count=2880
-	dd if=boot.bin of=boot.img conv=notrunc
-	dd if=entry.bin of=boot.img bs=512 seek=1 conv=notrunc
-
-
+	truncate -s 1474560 boot.img
 
 clean:
 
@@ -16,7 +13,7 @@ clean:
 
 run:
 
-	qemu-system-i386 boot.img --nographic
+	qemu-system-i386 -fda boot.img 
 
 
 .PHONY: clean run

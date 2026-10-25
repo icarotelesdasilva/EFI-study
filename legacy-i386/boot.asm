@@ -1,14 +1,11 @@
-BITS 16
-[org 0x7C00]
+section .text
+global real_mode
 
 
-_start:
 
-jmp 0x0000:.setup_segments 
+real_mode:
 
-
-.setup_segments:
-mov [boot_drive], dl   
+ mov [boot_drive], dl   
  
 cli
 
