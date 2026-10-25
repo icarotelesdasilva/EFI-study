@@ -4,6 +4,8 @@ disk:
     mov es, ax
     mov bx, 0x8000
 
+; NOTE: I had to use CHS for the time being due to technical errors and issues with LBA, but this is temporary.
+
     mov ah, 0x02
     mov al, 1
     mov ch, 0

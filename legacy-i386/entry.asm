@@ -3,6 +3,7 @@ section .text
 global _start
 
 BITS 16
+
 _start:
     cli
 
